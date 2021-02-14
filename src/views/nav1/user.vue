@@ -2,72 +2,104 @@
 	<section>
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true" :model="filters">
-				<el-form-item>
-					<el-input v-model="filters.name" placeholder="姓名"></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" v-on:click="getUser">查询</el-button>
-				</el-form-item>
-			</el-form>
+
+			<el-select v-model="value" placeholder="请选择">
+				<el-option
+				  v-for="item in options"
+				  :key="item.value"
+				  :label="item.label"
+				  :value="item.value">
+				</el-option>
+			</el-select>
+
+			<el-button  type="primary" @click="show_dataset">查看</el-button>
 		</el-col>
 
 		<!--列表-->
 		<template>
-			<el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
-				<el-table-column type="index" width="60">
-				</el-table-column>
-				<el-table-column prop="name" label="姓名" width="120" sortable>
-				</el-table-column>
-				<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
-				</el-table-column>
-				<el-table-column prop="age" label="年龄" width="100" sortable>
-				</el-table-column>
-				<el-table-column prop="birth" label="生日" width="120" sortable>
-				</el-table-column>
-				<el-table-column prop="addr" label="地址" min-width="180" sortable>
-				</el-table-column>
-			</el-table>
+		 <el-table class="tb-edit" highlight-current-row :data="tableData" style="width: 100%">
+
+            <template v-for="(col ,index) in cols">
+
+                <el-table-column v-if="col.type==='sort'" :prop="col.prop" sortable :label="col.label">
+
+                </el-table-column>
+            </template>
+        </el-table>
+
 		</template>
 
 	</section>
 </template>
 <script>
 	import { getUserList } from '../../api/api';
+	import axios from 'axios'
+	import  Table from './Table.vue'
+
 	//import NProgress from 'nprogress'
 	export default {
 		data() {
 			return {
-				filters: {
-					name: ''
-				},
-				loading: false,
-				users: [
-				]
+				options:[],
+				value:"",
+				cols: [],
+            	tableData: []
+
+
 			}
+		},
+		inject:['reload'],
+		mounted() {
+			this.get_datasets()
 		},
 		methods: {
-			//性别显示转换
-			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
+			get_datasets(){
+				axios.get('/api/get_data_list')
+						.then((response)=>{
+							for (var dataset of response.data.data){
+								this.options.push({
+									label:dataset,
+									value:dataset
+								})
+							}
+						})
 			},
-			//获取用户列表
-			getUser: function () {
-				let para = {
-					name: this.filters.name
-				};
-				this.loading = true;
-				//NProgress.start();
-				getUserList(para).then((res) => {
-					this.users = res.data.users;
-					this.loading = false;
-					//NProgress.done();
-				});
+			show_dataset(){
+				this.cols=[]
+				this.tableData=[]
+				axios.get('api/show_dataset?dataset_name='+this.value)
+						.then((response)=>{
+
+							var body=response.data
+							var body_data= response.data.data
+							var columns=body_data.cols
+							console.log(body)
+							//添加表头
+							for (var column of columns){
+								this.cols.push({
+									label:column,
+									prop:column,
+									type:"sort"
+								})
+							}
+							//计算数据长度，循环添加
+
+							console.log(columns,columns[0])
+							console.log(body_data)
+							var data_length=body_data[columns[0]].length
+							for(var i=0;i<data_length;i++){
+								//按行添加
+								var row={}
+								for(var column of columns){
+									row[column]=body_data[column][i]
+								}
+								console.log(row)
+								this.tableData.push(row)
+							}
+						})
 			}
 		},
-		mounted() {
-			this.getUser();
-		}
+
 	};
 
 </script>

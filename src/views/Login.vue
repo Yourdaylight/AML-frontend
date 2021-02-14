@@ -16,12 +16,12 @@
 </template>
 
 <script>
-  import { requestLogin } from '../api/api';
+
   //import NProgress from 'nprogress'
   export default {
     data() {
       return {
-        logining: false,
+        logining:false,
         ruleForm2: {
           account: 'admin',
           checkPass: '123456'
@@ -36,7 +36,7 @@
             //{ validator: validaePass2 }
           ]
         },
-        checked: true
+        checked: false
       };
     },
     methods: {
@@ -51,20 +51,13 @@
             this.logining = true;
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
-              this.logining = false;
-              //NProgress.done();
-              let { msg, code, user } = data;
-              if (code !== 200) {
-                this.$message({
-                  message: msg,
-                  type: 'error'
-                });
-              } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
-              }
-            });
+
+            this.logining = false;
+            var user='admin'
+            sessionStorage.setItem('user', JSON.stringify(user));
+            this.$router.push({ path: '/table' });
+
+            ;//fengexian
           } else {
             console.log('error submit!!');
             return false;
