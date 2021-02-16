@@ -1,5 +1,6 @@
-# 1、循环v-for
- ## 1.1 循环数组
+# 一、Vue 开发
+## 1、循环v-for
+ ### 1.1 循环数组
  ```vue
  <div id="app">
   <ol>
@@ -23,7 +24,7 @@ new Vue({
 </script>
 ```
 
-## 1.2 迭代对象
+### 1.2 迭代对象
 主要三种方法迭代
 - 迭代对象中的value `value in opject`
 - 迭代对象中的key,value `(value,key) in object`
@@ -52,7 +53,7 @@ new Vue({
 
 ```
 
-# 2、监听属性watch
+## 2、监听属性watch
 通过wacth响应数据变化。$watch是一个实例化的对象，通过两个参数`监听的变量，变量数据改变的回调函数`
 - 实例   
     data 属性中， kilometers 和 meters 初始值都为 0。watch 对象创建了两个方法 kilometers 和 meters。
@@ -94,8 +95,8 @@ new Vue({
 </script>
 ```
 
-# 3、表单
-## 3.1 v-model
+## 3、表单
+### 3.1 v-model
 修饰符
 - .lazy    
 .lazy在默认情况下， v-model 在 input 事件中同步输入框的值与数据，但你可以添加一个修饰符 lazy ，从而转变为在 change 事件中同步：   
@@ -108,12 +109,31 @@ new Vue({
 如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入：
 `<input v-model.trim="msg">`
 
-# 4、Element UI
-## 4.1 表格el_table
+## 4、Vue组件开发
+## 4.1 全局组件
+所有实例都能用全局组件。
+```vue
+<div id="app">
+    <runoob></runoob>
+</div>
+ 
+<script>
+// 注册
+Vue.component('runoob', {
+  template: '<h1>自定义组件!</h1>'
+})
+// 创建根实例
+new Vue({
+  el: '#app'
+})
+</script>
+```
+# 二、Element UI
+## 1 表格el_table
 当`el-table`元素中注入`data`对象数组后，   
 在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。
-## 4.2 文件上传按钮el-upload
-#### ①基本操作
+## 2 文件上传按钮el-upload
+### ①基本操作
 ```html
 <el-upload :action="uploadActionUrl">
     <el-button size="small" type="primary">点击上传</el-button>
@@ -122,7 +142,7 @@ new Vue({
 `:action`是执行上传动作的后台接口   
 `el-button`是触发上传的按钮
 
-#### ②文件上传数量限制
+### ②文件上传数量限制
 ```html
 <el-upload 
     :action="uploadActionUrl"
@@ -149,7 +169,7 @@ new Vue({
 </el-upload>
 ```
 ---
-## 附录 排除记录
+# 附录 排除记录
 1、axios请求后端接口（代理已配置无误）前端报错   
  原因：使用mock会拦截所有的ajax请求，因此浏览器无法从后端服务器找到路径
  

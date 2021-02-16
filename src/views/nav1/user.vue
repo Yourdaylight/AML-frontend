@@ -49,14 +49,20 @@
 			}
 		},
 		inject:['reload'],
-		mounted() {
+		created() {
 			this.get_datasets()
+			var datasetName=sessionStorage.getItem('dataset_name')
+			if (datasetName!='') {
+				this.value=datasetName
+				this.show_dataset()
+			}
 		},
 		methods: {
 			get_datasets(){
 				axios.get('/api/get_data_list')
 						.then((response)=>{
-							for (var dataset of response.data.data){
+							var original=response.data.data
+							for (var dataset of original.name){
 								this.options.push({
 									label:dataset,
 									value:dataset
@@ -83,18 +89,20 @@
 								})
 							}
 							//计算数据长度，循环添加
-
-							console.log(columns,columns[0])
-							console.log(body_data)
 							var data_length=body_data[columns[0]].length
+							if (data_length>100){
+								var text="当前数据集共有"+data_length+"条数据,预览仅显示前100条"
+								data_length=100
+								this.$message(text,'info')
+							}
 							for(var i=0;i<data_length;i++){
 								//按行添加
 								var row={}
 								for(var column of columns){
 									row[column]=body_data[column][i]
 								}
-								console.log(row)
 								this.tableData.push(row)
+								sessionStorage.setItem("dataset_name",this.value)
 							}
 						})
 			}

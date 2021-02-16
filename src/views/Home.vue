@@ -75,7 +75,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'ML代码生成平台',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',

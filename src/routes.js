@@ -27,7 +27,7 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '导航一',
+        name: '结构化数据建模',
         iconCls: 'el-icon-message',//图标样式class
         children: [
             { path: '/main', component: Main, name: '主页', hidden: true },
@@ -40,7 +40,7 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '导航二',
+        name: '图片数据建模',
         iconCls: 'fa fa-id-card-o',
         children: [
             { path: '/page4', component: Page4, name: '页面4' },
@@ -50,11 +50,11 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '',
+        name: '文本数据建模',
         iconCls: 'fa fa-address-card',
-        leaf: true,//只有一个节点
+        // leaf: true,//只有一个节点
         children: [
-            { path: '/page6', component: Page6, name: '导航三' }
+            { path: '/page6', component: Page6, name: '页面6' }
         ]
     },
     {

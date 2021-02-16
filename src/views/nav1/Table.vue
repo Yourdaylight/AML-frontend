@@ -18,9 +18,10 @@
 		<span style="color: orange">上传文件仅支持 csv,txt,xls、xlsx类型</span>
 
 		<el-table :data="tableData" style="width: 100%">
-			<el-table-column prop="date" label="日期" width="180"></el-table-column>
-			<el-table-column prop="name" label="姓名" width="180"></el-table-column>
-			<el-table-column prop="address" label="地址" width="180"></el-table-column>
+			<el-table-column prop="address" label="序号" width="180"></el-table-column>
+			<el-table-column prop="date" label="上传时间" width="180"></el-table-column>
+			<el-table-column prop="name" label="数据集名称" width="180"></el-table-column>
+
 			<el-table-column label="操作" width="180">
 				<template slot-scope="scope">
 				  <el-button size="mini" type="danger" @click="del(scope.row, scope.$index)">删除</el-button>
@@ -64,15 +65,27 @@
 
 		inject:['reload'],
 		methods:{
+			formatDate(date) {
+				  var date = new Date(date);
+				  var YY = date.getFullYear() + '-';
+				  var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+				  var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+				  var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+				  var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+				  var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+				  return YY + MM + DD +" "+hh + mm + ss;
+			},
 			//获取用户的所有数据集
 			data_list(){
 				axios.get('/api/get_data_list')
 						.then((response)=>{
-							for (var dataset of response.data.data){
+							var original=response.data.data
+							var len=original.name.length
+							for (var i=0;i<len;i++){
 									this.tableData.push({
-										date:2,
-										name:dataset,
-										address:dataset
+										date:this.formatDate(original.upload_time[i]*1000),
+										name:original.name[i],
+										address:i+1
 									})}
 						})
 			},
@@ -131,7 +144,8 @@
 				)
 			},
 			//跳转到数据预览页面
-			jump(dataset_name){
+			jump(row,i){
+				sessionStorage.setItem('dataset_name',row.name)
 				this.$router.push({ path: '/user' });
 			}
 

@@ -43,21 +43,20 @@
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
       },
-      handleSubmit2(ev) {
+      handleSubmit2: function (ev) {
         var _this = this;
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            var loginParams = {username: this.ruleForm2.account, password: this.ruleForm2.checkPass};
 
             this.logining = false;
-            var user='admin'
+            var user = 'admin'
             sessionStorage.setItem('user', JSON.stringify(user));
-            this.$router.push({ path: '/table' });
-
-            ;//fengexian
+            sessionStorage.setItem('dataset_name', '')
+            this.$router.push({path: '/table'});
           } else {
             console.log('error submit!!');
             return false;
