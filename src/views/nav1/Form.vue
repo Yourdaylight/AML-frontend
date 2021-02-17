@@ -27,7 +27,7 @@
 		</el-form-item>
 
 		<el-form-item label="目标列">
-			<el-select v-model="form.target" placeholder="请选择">
+			<el-select v-model="form.target" placeholder="请选择" clearable>
 				<el-option
 				  v-for="item in target_cols"
 				  :key="item.value"
@@ -147,18 +147,13 @@
 				})
 			},
 			get_datasets(){
-				axios.get('/api/get_data_list')
-						.then((response)=>{
-							var original=response.data.data
-							for (var dataset of original.name){
-								this.dataset_options.push({
-									label:dataset,
-									value:dataset
-								})
-							}
-
-						})
-			},
+                var original=JSON.parse(sessionStorage.getItem("dataset_list"))
+                for (var dataset of original){
+                    this.dataset_options.push({
+                        label:dataset,
+                        value:dataset
+                    })}
+                },
 			//获取选定数据集的各列名称
 			get_dataset_cols(dataset_name){
 				this.dataset_cols=[]

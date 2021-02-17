@@ -52,6 +52,7 @@
 			return {
 				tableData: [],
 				list:"name",
+				isloading:false
 
 			}
 		},
@@ -62,7 +63,6 @@
 			console.log(body)
 
   		},
-
 		inject:['reload'],
 		methods:{
 			formatDate(date) {
@@ -77,16 +77,28 @@
 			},
 			//获取用户的所有数据集
 			data_list(){
+			    var dataset_list=[]
 				axios.get('/api/get_data_list')
 						.then((response)=>{
+							this.isloading=true
 							var original=response.data.data
 							var len=original.name.length
 							for (var i=0;i<len;i++){
+							        var temp=original.name[i]
 									this.tableData.push({
 										date:this.formatDate(original.upload_time[i]*1000),
-										name:original.name[i],
+										name:temp,
 										address:i+1
-									})}
+									})
+                                    dataset_list.push(temp)
+							}
+							this.isloading=false
+                            console.log(dataset_list)
+                            sessionStorage.setItem("dataset_list",JSON.stringify(dataset_list))
+
+						})
+						.catch((error)=>{
+							this.isloading=false
 						})
 			},
 			//文件上传检验

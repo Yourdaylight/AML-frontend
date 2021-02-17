@@ -17,13 +17,11 @@
 
 		<!--列表-->
 		<template>
-		 <el-table class="tb-edit" highlight-current-row :data="tableData" style="width: 100%">
-
+		 <el-table class="tb-edit" highlight-current-row :data="tableData" style="width: 100%"
+		 	v-loading="isloading"
+		 	element-loading-text="正在拼命加载">
             <template v-for="(col ,index) in cols">
-
-                <el-table-column v-if="col.type==='sort'" :prop="col.prop" sortable :label="col.label">
-
-                </el-table-column>
+                <el-table-column v-if="col.type==='sort'" :prop="col.prop" sortable :label="col.label"></el-table-column>
             </template>
         </el-table>
 
@@ -43,8 +41,8 @@
 				options:[],
 				value:"",
 				cols: [],
-            	tableData: []
-
+            	tableData: [],
+				isloading:true
 
 			}
 		},
@@ -59,23 +57,24 @@
 		},
 		methods: {
 			get_datasets(){
-				axios.get('/api/get_data_list')
-						.then((response)=>{
-							var original=response.data.data
-							for (var dataset of original.name){
-								this.options.push({
-									label:dataset,
-									value:dataset
-								})
-							}
-						})
+
+			var original=JSON.parse(sessionStorage.getItem("dataset_list"))
+				console.log(original)
+			for (var dataset of original){
+				this.options.push({
+					label:dataset,
+					value:dataset
+				})
+			}
+
 			},
 			show_dataset(){
 				this.cols=[]
 				this.tableData=[]
+				this.isloading=true
 				axios.get('api/show_dataset?dataset_name='+this.value)
 						.then((response)=>{
-
+							this.isloading=true
 							var body=response.data
 							var body_data= response.data.data
 							var columns=body_data.cols
@@ -102,9 +101,12 @@
 									row[column]=body_data[column][i]
 								}
 								this.tableData.push(row)
-								sessionStorage.setItem("dataset_name",this.value)
 							}
-						})
+							sessionStorage.setItem("dataset_name",this.value)
+							this.isloading=false
+						}).catch((error)=>{
+							this.isloading=false
+				})
 			}
 		},
 
