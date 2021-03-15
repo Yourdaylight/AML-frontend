@@ -81,7 +81,7 @@
              <el-col style="white-space: pre-wrap;">{{original_code}}</el-col>
              <span slot="footer" class="dialog-footer">
                  <el-button @click="dialogVisible = false">取 消</el-button>
-                 <el-button type="primary" @click="dialogVisible = false">导出文件</el-button>
+                 <el-button type="primary" @click="onExportCode">导出文件</el-button>
                </span>
          </el-dialog>
 	</el-form>
@@ -89,6 +89,7 @@
 
 <script>
 	import axios from 'axios'
+	axios.defaults.withCredentials=true;
 	export default {
 		inject:['reload'],
 
@@ -136,7 +137,7 @@
 			onSubmit() {
 				console.log('submit!');
 				axios.post('/api/generate_code',{
-					username:"admin",
+					username:JSON.parse(sessionStorage.getItem('user')),
 					data:this.form
 				}).then((response)=>{
 					var code=response.data.data
@@ -159,8 +160,9 @@
 				this.dataset_cols=[]
 				this.target_cols=[]
 				this.tableData=[]
-				axios.get('api/show_dataset?dataset_name='+dataset_name)
+				axios.get('api/show_dataset?username='+sessionStorage.getItem('user')+'&dataset_name='+dataset_name)
 						.then((response)=>{
+
 							var body_data= response.data.data
 							var columns=body_data.cols
 							for(var column of columns){
@@ -203,6 +205,32 @@
 						this.target_cols.push(col)
 					}
 				}
+
+			},
+			//导出代码文件
+			onExportCode(){
+				axios.get('/api/export_code',{
+					params: {
+						username: JSON.parse(sessionStorage.getItem('user')),
+						name: this.form.name,
+						dataset_name: this.form.dataset_name
+					},
+
+				}).then((response)=>{
+					      let url = window.URL.createObjectURL(new Blob([response.data]));
+							// 生成一个a标签
+							let link = document.createElement("a");
+							link.style.display = "none";
+							link.href = url;
+							// 生成时间戳
+							let timestamp=new Date().getTime();
+							link.download = "generate_"+JSON.parse(sessionStorage.getItem('user'))+"_"+this.form.name + ".py";
+							document.body.appendChild(link);
+							link.click();
+
+				}).catch(error => {
+					this.$message.error("下载失败")
+				})
 
 			}
 		}

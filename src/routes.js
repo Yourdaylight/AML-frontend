@@ -3,8 +3,9 @@ import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import Table from './views/nav1/Table.vue'
-import Form from './views/nav1/Form.vue'
+import MLmodel from './views/nav1/MLmodel.vue'
 import user from './views/nav1/user.vue'
+import Clean from './views/nav1/Clean.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
@@ -33,7 +34,8 @@ let routes = [
             { path: '/main', component: Main, name: '主页', hidden: true },
             { path: '/table', component: Table, name: '我的数据集' },
             { path: '/user', component: user, name: '数据预览' },
-            { path: '/form', component: Form, name: '快速建模' },
+            { path:'/clean', component: Clean, name:'数据清洗'},
+            { path: '/MLmodel', component: MLmodel, name: '快速建模' },
 
         ]
     },

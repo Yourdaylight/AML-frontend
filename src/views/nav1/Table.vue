@@ -5,6 +5,7 @@
 				 drag
 				accept=".csv, .txt, .xls, .xlsx"
 				action="/api/upload_dataset"
+				 :data="user_info"
 				:limit="1"
 				:before-upload="beforeUpload"
 				:on-success="handleAvatarSuccess"
@@ -52,7 +53,10 @@
 			return {
 				tableData: [],
 				list:"name",
-				isloading:false
+				isloading:false,
+				user_info:{
+					"username":sessionStorage.getItem('user')
+				}
 
 			}
 		},
@@ -78,7 +82,8 @@
 			//获取用户的所有数据集
 			data_list(){
 			    var dataset_list=[]
-				axios.get('/api/get_data_list')
+				var username=sessionStorage.getItem('user')
+				axios.get('/api/get_data_list?username='+username)
 						.then((response)=>{
 							this.isloading=true
 							var original=response.data.data
@@ -142,8 +147,8 @@
 			del(row,i){
 				console.log(row.name,i)
 				axios.post('/api/del_dataset',{
-							username:"admin",
-							dataset_name:row.name
+							dataset_name:row.name,
+							username:sessionStorage.getItem('user')
 				}).then((response)=> {
 							console.log("查看返回值:",response.data)
 							var body=response.data
