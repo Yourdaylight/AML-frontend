@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d242b82-cb9f-402f-b127-e24c2f7034a5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/nav1/Clean.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/AMLlogo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/nav1/Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/nav1/MLmodel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/nav1/Table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/nav1/Table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/nav1/Clean.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/nav1/Clean.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/nav1/user.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/nav1/user.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,69 +27,16 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6565401">
+    <splitter split-orientation="horizontal" split-proportion="0.28612718">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/App.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="207">
-                  <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-                  <folding>
-                    <element signature="e#0#42#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1104">
-                  <caret line="48" selection-start-line="48" selection-end-line="48" />
-                  <folding>
-                    <element signature="n#style#0;n#a#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#el-form-item#2;n#el-form#0;n#template#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/views/Main.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="11" selection-start-line="11" selection-end-line="11" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/views/Home.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="483">
-                  <caret line="21" column="72" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/user.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="109">
-                  <caret line="94" column="44" lean-forward="true" selection-start-line="94" selection-start-column="44" selection-end-line="94" selection-end-column="44" />
+                <state relative-caret-position="327">
+                  <caret line="81" column="14" lean-forward="true" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
                   <folding>
                     <element signature="n#style#0;n#el-table#0;n#template#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#iframe#0;n#!!top" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -110,7 +50,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/fesfe.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="332">
+                <state relative-caret-position="1035">
                   <caret line="45" selection-start-line="45" selection-end-line="52" selection-end-column="50" />
                 </state>
               </provider>
@@ -119,8 +59,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/MLmodel.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3220">
-                  <caret line="140" column="34" selection-start-line="140" selection-start-column="34" selection-end-line="140" selection-end-column="34" />
+                <state relative-caret-position="318">
+                  <caret line="179" column="26" lean-forward="true" selection-start-line="179" selection-start-column="26" selection-end-line="179" selection-end-column="26" />
                   <folding>
                     <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-col#0;n#el-dialog#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
@@ -129,11 +69,23 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/Clean.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+                <state relative-caret-position="1244">
+                  <caret line="176" column="5" lean-forward="true" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
+                  <folding>
+                    <element signature="n#style#0;n#el-col#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/api/api.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="437">
+                  <caret line="19" selection-start-line="19" selection-end-line="19" />
                 </state>
               </provider>
             </entry>
@@ -145,8 +97,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/MLmodel.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="79" column="3" selection-start-line="79" selection-start-column="3" selection-end-line="85" selection-end-column="21" />
+                <state relative-caret-position="309">
+                  <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
                   <folding>
                     <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-col#0;n#el-dialog#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
@@ -155,11 +107,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/Table.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="895">
-                  <caret line="104" selection-start-line="103" selection-end-line="104" />
+                <state relative-caret-position="261">
+                  <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
                   <folding>
                     <element signature="n#style#0;n#span#0;n#section#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
@@ -171,11 +123,25 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/nav1/user.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-23">
-                  <caret line="5" column="56" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
+                <state relative-caret-position="1311">
+                  <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
                   <folding>
                     <element signature="n#style#0;n#el-table#0;n#template#0;n#section#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#iframe#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/views/nav1/Clean.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="419">
+                  <caret line="156" column="23" lean-forward="true" selection-start-line="156" selection-start-column="23" selection-end-line="156" selection-end-column="23" />
+                  <folding>
+                    <element signature="n#style#0;n#el-col#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#i#0;n#span#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#i#1;n#span#0;n#!!top" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -234,23 +200,24 @@
         <option value="$PROJECT_DIR$/src/views/Login.vue" />
         <option value="$PROJECT_DIR$/src/views/nav1/Form.vue" />
         <option value="$PROJECT_DIR$/src/routes.js" />
-        <option value="$PROJECT_DIR$/src/views/nav1/Clean.vue" />
         <option value="$PROJECT_DIR$/src/views/nav1/MLmodel.vue" />
         <option value="$PROJECT_DIR$/fesfe.py" />
         <option value="$PROJECT_DIR$/src/views/nav1/user.vue" />
+        <option value="$PROJECT_DIR$/src/views/nav1/Clean.vue" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1933" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-13" />
+    <option name="width" value="2419" />
+    <option name="height" value="1300" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -261,13 +228,29 @@
             <path>
               <item name="AML-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="AML_frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AML-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AML_frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AML-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AML_frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AML-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AML_frontend" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -357,7 +340,11 @@
       <workItem from="1614862502603" duration="1191000" />
       <workItem from="1614936442788" duration="10786000" />
       <workItem from="1615182490589" duration="591000" />
-      <workItem from="1615783114596" duration="8893000" />
+      <workItem from="1615783114596" duration="9997000" />
+      <workItem from="1615874324346" duration="3371000" />
+      <workItem from="1615950333058" duration="8867000" />
+      <workItem from="1616040539774" duration="1219000" />
+      <workItem from="1616119719576" duration="22321000" />
     </task>
     <task id="LOCAL-00001" summary="自动机器学习前端组件">
       <created>1601387458948</created>
@@ -408,18 +395,24 @@
       <option name="project" value="LOCAL" />
       <updated>1613577068786</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="结构化数据建模/数据预览 新增报告生成功能">
+      <created>1615822999239</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615822999239</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221246000" />
+    <option name="totallyTimeSpent" value="258128000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1546" height="830" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.44071588" visible="true" weight="0.20362903" />
-      <window_info id="Structure" order="1" sideWeight="0.5592841" side_tool="true" visible="true" weight="0.20362903" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.2550091" visible="true" weight="0.072386056" />
+      <window_info id="Structure" order="1" sideWeight="0.7449909" side_tool="true" visible="true" weight="0.072386056" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -432,8 +425,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32844576" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.33679524" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.38709676" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19501466" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.38641426" />
       <window_info anchor="bottom" id="TypeScript" order="13" weight="0.32991204" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -476,7 +469,8 @@
     <MESSAGE value="数据集上传，数据预览" />
     <MESSAGE value="数据建模页面响应功能完成" />
     <MESSAGE value="过渡动画,数据集列表session存储" />
-    <option name="LAST_COMMIT_MESSAGE" value="过渡动画,数据集列表session存储" />
+    <MESSAGE value="结构化数据建模/数据预览 新增报告生成功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="结构化数据建模/数据预览 新增报告生成功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -491,10 +485,10 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Test_Dataset/day.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/vars.scss">
       <provider selected="true" editor-type-id="text-editor" />
@@ -607,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="34" selection-start-line="8" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -664,38 +651,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
+    <entry file="file://$PROJECT_DIR$/static/lzh3_day_csv.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/lzh3_白名单_20210316140337_xlsx.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
+        <state relative-caret-position="-450970" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
+        <state>
           <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-form-item#2;n#el-form#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Main.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -709,38 +679,60 @@
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/nav1/Clean.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fesfe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
+        <state relative-caret-position="1035">
           <caret line="45" selection-start-line="45" selection-end-line="52" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/nav1/MLmodel.vue">
+    <entry file="file://$PROJECT_DIR$/src/api/api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3220">
-          <caret line="140" column="34" selection-start-line="140" selection-start-column="34" selection-end-line="140" selection-end-column="34" />
+        <state relative-caret-position="437">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Main.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
           <folding>
-            <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-col#0;n#el-dialog#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-form-item#2;n#el-form#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/lzh3_day_csv.html">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-920">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/nav1/user.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#template#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iframe#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/nav1/Table.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="895">
-          <caret line="104" selection-start-line="103" selection-end-line="104" />
+        <state relative-caret-position="261">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#span#0;n#section#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
@@ -748,13 +740,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/nav1/user.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/nav1/MLmodel.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="94" column="44" lean-forward="true" selection-start-line="94" selection-start-column="44" selection-end-line="94" selection-end-column="44" />
+        <state relative-caret-position="309">
+          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
           <folding>
-            <element signature="n#style#0;n#el-table#0;n#template#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#iframe#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-col#0;n#el-dialog#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/nav1/Clean.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="156" column="23" lean-forward="true" selection-start-line="156" selection-start-column="23" selection-end-line="156" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#el-col#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#span#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

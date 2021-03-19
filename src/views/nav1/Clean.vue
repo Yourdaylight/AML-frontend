@@ -1,8 +1,8 @@
 <template>
-    	<!--工具条-->
+	<!--工具条-->
+	<div>
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-
-			<el-select v-model="value" placeholder="请选择">
+			数据集选择<el-select v-model="value" placeholder="请选择" @change="on_dataset_change">
 				<el-option
 				  v-for="item in options"
 				  :key="item.value"
@@ -10,28 +10,80 @@
 				  :value="item.value">
 				</el-option>
 			</el-select>
-
-			<el-button  type="primary" @click="add_step">添加步骤</el-button>
 		</el-col>
+
+<!--		<el-col v-for="msg in message" >-->
+<!--			<el-col v-html="msg"></el-col>-->
+<!--		</el-col>-->
+		<el-col class="clean_condition">
+			对
+			<el-select multiple v-model="clean_form.columns">
+				<el-option
+					  v-for="item in cols"
+					  :key="item" :label="item" :value="item">
+				</el-option>
+			</el-select>列
+			进行
+			<el-select v-model="clean_form.clean_method" @change="on_method_change">
+				<el-option
+					 v-for="item in method_choice"
+					 :key="item" :label="item.label" :value="item.value">
+				</el-option>
+			</el-select>
+
+			<!--清洗方法类的子方法下拉选择框	-->
+			<el-select  v-model="clean_form.sub_method" v-show="show_sub_method">
+				<el-option v-for="item in clean_methods[clean_form.clean_method]"
+						   :key="item" :label="item" :value="item">
+				</el-option>
+			</el-select>
+
+			操作<el-button  type="primary" @click="add_step">添加步骤</el-button>
+		</el-col>
+		<div v-html="condition_html"></div>
+	</div>
+
+
+
+
+
+
 </template>
 
 <script>
+	import axios from 'axios'
+
     export default {
         name: "Clean",
 
 		data(){
 			return{
+				clean_form:{
+					columns:"",//数据清洗应用列
+					clean_method:"",//清洗方法
+					sub_method:"",//下拉框选择的子方法
+					sub_condition:"",//子方法产生的输入框
+				},
 				options:[],
 				value:"",
 				cols: [],
             	tableData: [],
-				isloading:false
+				isloading:false,
+				cleanCondition: [],//用户输入动态生成的清洗条件
+				method_choice:[],
+				clean_methods: {},//后端传的清洗方法（部分方法可能会有子方法需要动态生成输入框）
+				show_sub_method:false,
+				condition_html:""
 			}
 		},
 		created(){
         	this.get_datasets()
+			this.get_clean_methods()
+
 		},
 		methods:{
+        	/*初始化加载方法:用户所有数据集、清洗方法 */
+
 			get_datasets(){
 				var original=JSON.parse(sessionStorage.getItem("dataset_list"))
 					console.log(original)
@@ -42,23 +94,89 @@
 					})
 				}
 			},
+			get_clean_methods(){
+				axios.get('api/get_clean_methods').then(
+						(response)=>{
+							var methods = response.data.data
+							console.log(methods)
+							this.clean_methods=methods
+
+							for (var method in methods){
+								this.method_choice.push({
+									label:method,
+									value:method
+								})
+							}
+						}
+				)
+			},
+			/*业务方法*/
+			//根据数据集名称获取所有列
 			get_dataset_cols(dataset_name){
-				axios.get('api/show_dataset?username='+sessionStorage.getItem('user')+'&dataset_name='+dataset_name)
+				axios.get('api/get_dataset_cols?username='+sessionStorage.getItem('user')+'&dataset_name='+this.value)
 						.then((response)=>{
-							var body_data= response.data.data
-							var columns=body_data.cols
+							var columns= response.data.data
 							sessionStorage.setItem("dataset_cols",JSON.stringify(columns))
 							sessionStorage.setItem("dataset_name",dataset_name)
+							this.cols=columns
+							this.cols.unshift("全部")
 
 						})
 			},
-			add_step(){
+			//数据集发生变化，获取对应数据列
+			on_dataset_change(){
+				this.get_dataset_cols(this.value)
+				this.cleanCondition=[]
+			},
 
-			}
+			on_method_change(){
+				var method = this.clean_form.clean_method
+				var sub_method = this.clean_methods[method]
+				var have_sub =typeof sub_method === "string" ? false:true
+				if (have_sub){
+					this.clean_form.sub_method = this.clean_methods[method][0]
+				}
+				this.show_sub_method = have_sub
+
+			},
+			add_step(){
+				var clean_form = this.clean_form
+				var content=`
+				<span style="margin-top='10px';">
+					对<i class="column_style"
+							style="color: orangered;
+						    margin-left: 10px;margin-right: 10px;
+						    border-radius: 3px;border: 1px solid orangered"
+						  >${clean_form.columns.join(",")}</i>列进行
+					<i class="method_style"
+					style="color: blue;
+						   margin-left: 10px;margin-right: 10px;
+						   border-radius: 3px;border: 1px solid blue""
+					>${clean_form.clean_method} -- ${clean_form.sub_method}</i>
+					<i></i>
+
+				</span>
+				`
+				this.condition_html=content
+				console.log(this.clean_form.columns)
+			},
+
 		}
     }
 </script>
 
 <style scoped>
+	.clean_condition{
+		margin-top: 10px;
+	}
+	i.column_style{
+		border: 1px;
+		border-radius: 4px;
+		color: orangered;
+		font-size: 10px;
+		background: #000;
+	}
+	.method_style{
 
+	}
 </style>

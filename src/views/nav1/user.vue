@@ -72,6 +72,7 @@
                         value: dataset
                     })
                 }
+
             },
             //数据集发生变化时，隐藏生成报告的iframe
             on_dataset_change(){
@@ -89,6 +90,7 @@
                         var body = response.data
                         var body_data = response.data.data
                         var columns = body_data.cols
+                        sessionStorage.setItem("dataset_cols", JSON.stringify(columns))
                         console.log(body)
                         //添加表头
                         for (var column of columns) {
