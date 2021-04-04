@@ -44,7 +44,7 @@
             <el-button type="primary" @click="add_step">添加步骤</el-button>
         </el-col>
 
-        <ul>
+        <ul class="clean_conditions">
             <li  v-for="(item ,index) in cleanCondition">
                 对
                 <b class="column_style">{{item.columns.join(",")}}</b>列进行
@@ -54,6 +54,28 @@
                 <i class="el-icon-arrow-down" @click="click_down(index)"></i>
             </li>
         </ul>
+
+        <el-button type="warning" style="margin-top: 20px" @click="clean_data">生成新的数据</el-button>
+        <el-button type="primary" style="margin-top: 20px" >生成数据清洗代码</el-button>
+
+
+          <!--生成新数据导入我的数据集确认弹框-->
+        <el-dialog title="保存新数据" :visible.sync="saveDataDialogVisible" :close-on-click-modal="true" :modal="true" :show-close="true" :center="true">
+             <el-col style="white-space: pre-wrap;">清洗规则校验通过，是否保存清洗后的新数据</el-col>
+             <span slot="footer" class="dialog-footer">
+                 <el-button type="danger" @click="saveDataDialogVisible = false">否</el-button>
+                 <el-button type="primary" @click="save_clean_data" >是</el-button>
+             </span>
+         </el-dialog>
+
+              <!--数据清洗代码生成弹框-->
+        <el-dialog title="数据清洗代码" :visible.sync="generateCodeDialogVisible" :close-on-click-modal="true" :modal="true" :show-close="true" :center="true">
+             <el-col style="white-space: pre-wrap;">清洗规则校验通过，是否保存清洗后的新数据</el-col>
+             <span slot="footer" class="dialog-footer">
+                 <el-button type="danger" @click="generateCodeDialogVisible = false">否</el-button>
+                 <el-button type="primary" @click="" >是</el-button>
+             </span>
+         </el-dialog>
     </div>
 
 
@@ -83,7 +105,9 @@
                 method_choice: [],
                 clean_methods: {},//后端传的清洗方法（部分方法可能会有子方法需要动态生成输入框）
                 show_sub_method: false,
-                condition_html: ""
+                condition_html: "",
+                saveDataDialogVisible: false,
+                generateCodeDialogVisible: false
             }
         },
         created() {
@@ -106,7 +130,7 @@
                 }
             },
             get_clean_methods() {
-                axios.get('api/get_clean_methods').then(
+                axios.get('api/model_selection/get_methods?type=clean').then(
                     (response) => {
                         var methods = response.data.data
                         console.log(methods)
@@ -156,7 +180,6 @@
                         this.cols = columns
                         this.cols.unshift("全部")
 
-
                     })
             },
             //数据集发生变化，获取对应数据列
@@ -184,6 +207,31 @@
                 })
 
             },
+            //校验清洗条件
+            clean_data(){
+                axios.post("/api/engine/check_clean_condition",{
+                   "conditions":this.cleanCondition,
+                   "dataset":this.value,
+                    "user_name":JSON.parse(sessionStorage.getItem("user"))
+                }).then((response)=>{
+                    var data = response.data
+                    data.code === 200 ? this.$message.info(data.msg):this.$message.error(data.msg)
+                    this.saveDataDialogVisible = true
+                }).catch((error)=>{
+                    this.$message.error("错误")
+                })
+            },
+            save_clean_data(){
+                axios.post("/api/engine/save_clean_data", {
+                    "conditions":this.cleanCondition,
+                   "dataset":this.value,
+                    "user_name":JSON.parse(sessionStorage.getItem("user"))
+                }).then((response)=>{
+                    var data = response.data
+                    data.code === 200 ? this.$message.info(data.msg):this.$message.error(data.msg)
+                    this.$router.push({path: '/table'});
+                })
+            }
 
         }
     }
@@ -196,6 +244,11 @@
         cursor: pointer;
     }
 
+    .clean_conditions{
+        display: block;
+        margin-top: 50px;
+        font-size: 20px;
+    }
 
     .column_style {
         color: orangered;

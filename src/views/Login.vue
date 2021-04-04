@@ -39,8 +39,10 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-               <el-button @click="dialogVisible = false">取 消</el-button>
-               <el-button type="primary" @click.native.prevent="handleRegistSubmit">立即注册</el-button>
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click.native.prevent="handleRegistSubmit">立即注册</el-button>
+                <el-button @click="runCode">立即运行</el-button>
+
              </span>
         </el-dialog>
     </el-form>
@@ -71,7 +73,7 @@
                   if (value===''){
                         callback(new Error("输入不能为空!"))
                     }
-                  axios.post("/api/check_exist",{
+                  axios.post("/api/user_authority/check_exist",{
                       "query_dict":{"username":value}
                   }).then((response)=>{
                       var data=response.data
@@ -88,7 +90,7 @@
                   if (value===''){
                         callback(new Error("输入不能为空!"))
                     }
-                  axios.post("/api/check_exist",{
+                  axios.post("/api/user_authority/check_exist",{
                       "query_dict":{"email":value}
                   }).then((response)=>{
                       var data=response.data
@@ -158,36 +160,40 @@
             handleReset2() {
                 this.$refs.ruleForm2.resetFields();
             },
-            handleSubmit2(ev) {
+            handleSubmit2: function (ev) {
                 var _this = this;
                 this.$refs.ruleForm2.validate((valid) => {
                     if (valid) {
                         //_this.$router.replace('/table');
                         this.logining = true;
-                        axios.post("/api/login",{
+                        axios.post("/api/user_authority/login", {
                             username: this.ruleForm2.account,
                             password: Base64.encode(this.ruleForm2.checkPass)
-                        }).then((response)=>{
-                            var data=response.data
-                            if (data.msg===true) {
+                        }).then((response) => {
+                            var data = response.data
+                            if (data.msg === true) {
                                 this.logining = false;
-                                var user =this.ruleForm2.account
+                                var user = this.ruleForm2.account
                                 console.log(user)
                                 sessionStorage.setItem('user', JSON.stringify(user));
                                 sessionStorage.setItem('dataset_name', '')
                                 this.$router.push({path: '/table'});
                                 this.$message.success("登录成功")
-                            }else {
+                            } else {
                                 this.logining = false;
                                 this.$message.error("用户名或密码错误，登录失败")
                             }
+                        }).catch((error) => {
+                            this.logining = false;
+                            this.$message.error("登录失败！")
                         })
                     } else {
                         console.log('error submit!!');
                         this.$message.error("用户名或密码错误，登录失败")
                         return false;
                     }
-                })},
+                })
+            },
 
             handleRegistSubmit(){
                 var _this = this;
@@ -196,7 +202,7 @@
                     if (valid) {
                         console.log("表单校验通过!")
                         flag=true
-                        axios.post('/api/regist',{
+                        axios.post('/api/user_authority/regist',{
                             username:this.registform.username,
                             password:Base64.encode(this.registform.password),
                             email:this.registform.email,
@@ -217,10 +223,13 @@
                 })
 
             },
+            runCode(){
+                this.$message.info("按钮测试")
+            },
             getCode(){
                     let me = this;
                     this.isDiabled=true
-                    axios.post('api/send_code',{
+                    axios.post('api/user_authority/send_code',{
                         "email":this.registform.email
                     })
                     var totalTime=60

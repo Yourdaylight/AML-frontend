@@ -38,7 +38,7 @@
 		</el-form-item>
 
 		<el-form-item label="模型类型">
-			<el-select v-model="form.model_type" placeholder="请选择模型类型">
+			<el-select v-model="form.model_type" placeholder="请选择模型类型" @change="onModelTypeChange">
 				<el-option label="分类" value="分类"></el-option>
 				<el-option label="回归" value="回归"></el-option>
 				<el-option label="聚类" value="聚类"></el-option>
@@ -106,7 +106,6 @@
 					models: [],
 					metrics:[],
 					desc:''
-
 				},
 				models:{
 					"分类":['朴素贝叶斯','支持向量机','神经网络','逻辑回归','决策树',"KNN"],
@@ -130,8 +129,8 @@
 			if (datasetName!='') {
 				this.form.dataset_name=datasetName
 				this.get_dataset_cols(datasetName)
-
 			}
+			this.get_methods()
 		},
 		methods: {
 			onSubmit() {
@@ -143,7 +142,6 @@
 					var code=response.data.data
 					this.original_code=code
 					this.dialogVisible=true;
-
 
 				})
 			},
@@ -180,6 +178,21 @@
 						})
 			},
 
+			// 获取数据建模方法
+			get_methods(){
+				axios.get('api/model_selection/get_methods?type=ml').then(
+                    (response) => {
+                        var methods = response.data.data
+                        this.models = methods
+                    }
+                )
+				axios.get('api/model_selection/get_methods?type=metrics').then(
+                    (response) => {
+                        var methods = response.data.data
+                        this.metrics = methods
+                    }
+                )
+			},
 			//选择完数据集后动态生成特征列、目标列下拉框
 			onDatasetChange(){
 				this.form={
@@ -206,6 +219,11 @@
 					}
 				}
 
+			},
+			//模型类型发生变化时，清空模型选择，模型评估的内容
+			onModelTypeChange(){
+				this.form.models = []
+				this.form.metrics = []
 			},
 			//导出代码文件
 			onExportCode(){
