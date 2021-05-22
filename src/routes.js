@@ -31,13 +31,22 @@ let routes = [
         name: '结构化数据建模',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/table', component: Table, name: '我的数据集' },
-            { path: '/user', component: user, name: '数据预览' },
-            { path:'/clean', component: Clean, name:'数据清洗'},
-            { path: '/MLmodel', component: MLmodel, name: '快速建模' },
+            {
+                path: '/main',
+                component: Main,
+                name: '主页',
+                hidden: true ,
+                keepAlive: true
+            },
+            { path: '/table', component: Table, name: '我的数据集', keepAlive: true },
+            { path: '/user', component: user, name: '数据预览', keepAlive: true },
+            { path:'/clean', component: Clean, name:'数据清洗', keepAlive: true},
+            { path: '/MLmodel', component: MLmodel, name: '快速建模', keepAlive: true },
 
-        ]
+        ],
+        meta: {
+            keepAlive: true
+        }
     },
     {
         path: '/',
@@ -47,7 +56,10 @@ let routes = [
         children: [
             { path: '/page4', component: Page4, name: '页面4' },
             { path: '/page5', component: Page5, name: '页面5' }
-        ]
+        ],
+        meta: {
+            title:"ML代码生成平台"
+        }
     },
     {
         path: '/',

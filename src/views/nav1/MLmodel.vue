@@ -45,6 +45,16 @@
 			</el-select>
 		</el-form-item>
 
+		<el-form-item label="数据建模适用场景">
+			<el-select v-model="form.model_scene" placeholder="请选择模型类型" @change="onModelTypeChange">
+				<el-option
+				 v-for="item in scenes"
+						:label="item"
+						:value="item"
+				></el-option>
+			</el-select>
+		</el-form-item>
+
 		<el-form-item label="模型选择">
 			<el-checkbox-group v-model="form.models">
 				<el-checkbox
@@ -74,16 +84,17 @@
 			<el-button type="primary" @click="onSubmit">立即创建</el-button>
 			<el-button @click.native.prevent>取消</el-button>
 		</el-form-item>
-		<!--		弹出框-->
-<!--		<code_dailog></code_dailog>-->
-		   <!--生成代码弹框-->
+
+		<!--生成代码弹框-->
         <el-dialog title="代码" :visible.sync="dialogVisible" :close-on-click-modal="true" :modal="true" :show-close="true" :center="true">
-             <el-col style="white-space: pre-wrap;">{{original_code}}</el-col>
-             <span slot="footer" class="dialog-footer">
+			<el-col style="white-space: pre-wrap;">{{original_code}}</el-col>-->
+			<span slot="footer" class="dialog-footer">
                  <el-button @click="dialogVisible = false">取 消</el-button>
                  <el-button type="primary" @click="onExportCode">导出文件</el-button>
-               </span>
+				 <el-button type="primary" @click="run_code">立即运行</el-button>
+			</span>
          </el-dialog>
+		<el-col v-html="run_code_result">{{run_code_result}}</el-col>
 	</el-form>
 </template>
 
@@ -105,22 +116,19 @@
 					target:'',
 					models: [],
 					metrics:[],
-					desc:''
+					desc:'',
+					model_scene:"股价预测",
+
 				},
-				models:{
-					"分类":['朴素贝叶斯','支持向量机','神经网络','逻辑回归','决策树',"KNN"],
-					"回归":['支持向量机','神经网络','线性回归','决策树','KNN'],
-					"聚类":['K-means']
-				},
-				metrics:{
-					"分类":['ROC曲线','混淆矩阵'],
-					"回归":["误差平方和","决定系数(R²)"],
-					"聚类":[]
-				},
+				models:{},//用户可选择的模型,key为模型类型(分类，回归，聚类),value为具体模型[]
+				metrics:{},//用户可选择的模型评估方法,key为模型类型(分类，回归，聚类),value为具体方法[]
 				dataset_options:[],
 				dataset_cols:[],
 				//用于目标列中不出现已选择的特征列
-				target_cols:[]
+				target_cols:[],
+				run_code_result:"",
+				scenes:["股价预测","气温预测","湿度预测",
+						"成绩等级分类","属性分类"]
 			}
 		},
 		created(){
@@ -250,6 +258,33 @@
 					this.$message.error("下载失败")
 				})
 
+			},
+
+			//运行代码文件
+			run_code(){
+				axios.post('/api/engine/run_mining_code',{
+					username:JSON.parse(sessionStorage.getItem('user')),
+					data:this.form
+
+				}).then((response)=>{
+					var code = response.data.code
+					if (code === 200) {
+						var data = response.data
+						this.$message.success("执行成功")
+						var html_name = response.data.data
+						console.log(html_name)
+						var insert_iframe = '<iframe  src="../../../static/'+html_name+
+                                            '" scrolling="yes" style="width: 100%;height: 500px;" frameborder="0"></iframe>'
+						this.run_code_result = insert_iframe
+					}
+					else
+						this.$message.error(response.data.msg)
+
+				}).catch(error => {
+					console.log(error.response)
+					this.$message.error(error.response)
+					this.$message.error("配置参数不合理，运行失败！")
+				})
 			}
 		}
 	}

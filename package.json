@@ -17,6 +17,7 @@
     "js-base64": "^3.6.0",
     "nprogress": "^0.2.0",
     "vue": "^2.2.2",
+    "vue-json-editor": "^1.4.3",
     "vue-router": "^2.3.0",
     "vuex": "^2.0.0-rc.6"
   },

@@ -39,15 +39,11 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
-// 防止手动修改session
 window.addEventListener('storage', (e) => {
 console.log('e:', e)
   localStorage.setItem(e.key, e.oldValue) //重新赋值修改前的值
   sessionStorage.setItem(e.key, e.oldValue) //重新赋值修改前的值
 })
-
-
 //router.afterEach(transition => {
 //NProgress.done();
 //});
