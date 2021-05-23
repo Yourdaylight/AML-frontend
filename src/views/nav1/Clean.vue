@@ -223,8 +223,14 @@
                     "user_name":JSON.parse(sessionStorage.getItem("user"))
                 }).then((response)=>{
                     var data = response.data
-                    data.code === 200 ? this.$message.info(data.msg):this.$message.error(data.msg)
-                    this.saveDataDialogVisible = true
+                    if (data.code === 200) {
+                        this.$message.info(data.msg)
+                        this.saveDataDialogVisible = true
+                    }else{
+                        this.$message.error(data.msg)
+                    }
+
+
                 }).catch((error)=>{
                     this.$message.error("错误")
                 })
@@ -237,9 +243,15 @@
                     "user_name":JSON.parse(sessionStorage.getItem("user"))
                 }).then((response)=>{
                     var data = response.data
-                    data.code === 200 ? this.$message.info(data.msg):this.$message.error(data.msg)
-                    this.clean_code = data.data
-                    this.codeDialogVisible = true
+                    if (data.code === 200){
+                        this.$message.info(data.msg)
+                        this.clean_code = data.data
+                        this.codeDialogVisible = true
+                        }
+                    //校验失败
+                    else{
+                        this.$message.error(data.msg)
+                    }
                 }).catch((error)=>{
                     this.$message.error("错误")
                 })
