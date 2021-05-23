@@ -34,7 +34,8 @@
             </el-select>
 
             <!--清洗方法类的子方法下拉选择框	-->
-            <el-select v-model="clean_form.sub_method" v-show="show_sub_method">
+            <el-select v-model="clean_form.sub_method" v-show="show_sub_method"
+            >
                 <el-option v-for="item in clean_methods[clean_form.clean_method]"
                            :key="item" :label="item" :value="item">
                 </el-option>
@@ -56,7 +57,7 @@
         </ul>
 
         <el-button type="warning" style="margin-top: 20px" @click="clean_data">生成新的数据</el-button>
-        <el-button type="primary" style="margin-top: 20px" >生成数据清洗代码</el-button>
+        <el-button type="primary" style="margin-top: 20px" @click="generate_clean_code" >生成数据清洗代码</el-button>
 
 
           <!--生成新数据导入我的数据集确认弹框-->
@@ -69,12 +70,17 @@
          </el-dialog>
 
               <!--数据清洗代码生成弹框-->
-        <el-dialog title="数据清洗代码" :visible.sync="generateCodeDialogVisible" :close-on-click-modal="true" :modal="true" :show-close="true" :center="true">
-             <el-col style="white-space: pre-wrap;">清洗规则校验通过，是否保存清洗后的新数据</el-col>
+        <el-dialog title="代码"
+                   :visible.sync="codeDialogVisible"
+                   :close-on-click-modal="true" :modal="true"
+                   :show-close="true" :center="true"
+                  >
+             <el-col style="white-space: pre-wrap;max-height: 80%">{{clean_code}}</el-col>
              <span slot="footer" class="dialog-footer">
-                 <el-button type="danger" @click="generateCodeDialogVisible = false">否</el-button>
-                 <el-button type="primary" @click="" >是</el-button>
-             </span>
+                 <el-button @click="codeDialogVisible = false">取 消</el-button>
+                 <el-button type="primary" @click="onExportCode">导出文件</el-button>
+				 <el-button @click="clean_data">立即运行</el-button>
+			 </span>
          </el-dialog>
     </div>
 
@@ -107,7 +113,9 @@
                 show_sub_method: false,
                 condition_html: "",
                 saveDataDialogVisible: false,
-                generateCodeDialogVisible: false
+                generateCodeDialogVisible: false,
+                codeDialogVisible: false,
+                clean_code: ""
             }
         },
         created() {
@@ -221,6 +229,22 @@
                     this.$message.error("错误")
                 })
             },
+            //生成清洗代码
+            generate_clean_code(){
+                axios.post("/api/model_selection/generate_clean_code",{
+                   "conditions":this.cleanCondition,
+                   "dataset":this.value,
+                    "user_name":JSON.parse(sessionStorage.getItem("user"))
+                }).then((response)=>{
+                    var data = response.data
+                    data.code === 200 ? this.$message.info(data.msg):this.$message.error(data.msg)
+                    this.clean_code = data.data
+                    this.codeDialogVisible = true
+                }).catch((error)=>{
+                    this.$message.error("错误")
+                })
+            },
+            //清洗完成的数据入库
             save_clean_data(){
                 axios.post("/api/engine/save_clean_data", {
                     "conditions":this.cleanCondition,

@@ -38,10 +38,10 @@ let routes = [
                 hidden: true ,
                 keepAlive: true
             },
-            { path: '/table', component: Table, name: '我的数据集', keepAlive: true },
-            { path: '/user', component: user, name: '数据预览', keepAlive: true },
-            { path:'/clean', component: Clean, name:'数据清洗', keepAlive: true},
-            { path: '/MLmodel', component: MLmodel, name: '快速建模', keepAlive: true },
+            { path: '/table', component: Table, name: '我的数据集', meta:{keepAlive: true} },
+            { path: '/user', component: user, name: '数据预览', meta:{keepAlive: true} },
+            { path:'/clean', component: Clean, name:'数据清洗', meta:{keepAlive: true}},
+            { path: '/MLmodel', component: MLmodel, name: '快速建模', meta:{keepAlive: true} },
 
         ],
         meta: {

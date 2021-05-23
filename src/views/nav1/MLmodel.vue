@@ -94,7 +94,7 @@
 				 <el-button type="primary" @click="run_code">立即运行</el-button>
 			</span>
          </el-dialog>
-		<el-col v-html="run_code_result">{{run_code_result}}</el-col>
+		<el-col v-html="run_code_result"></el-col>
 	</el-form>
 </template>
 
@@ -276,6 +276,7 @@
 						var insert_iframe = '<iframe  src="../../../static/'+html_name+
                                             '" scrolling="yes" style="width: 100%;height: 500px;" frameborder="0"></iframe>'
 						this.run_code_result = insert_iframe
+						this.dialogVisible = false
 					}
 					else
 						this.$message.error(response.data.msg)
@@ -285,7 +286,7 @@
 					this.$message.error(error.response)
 					this.$message.error("配置参数不合理，运行失败！")
 				})
-			}
+			},
 		}
 	}
 
