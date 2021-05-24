@@ -16,7 +16,7 @@
 			<span class="iconfont icon-shangchuan" />上传文件
 		  </el-button>
 		</el-upload>
-		<span style="color: orange">上传文件仅支持 csv,txt,xls、xlsx类型</span>
+		<span style="color: orange">上传文件仅支持 csv,txt,xls,xlsx类型</span>
 
 		<el-table :data="tableData" style="width: 100%">
 			<el-table-column prop="address" label="序号" width="180"></el-table-column>
@@ -36,10 +36,6 @@
 		    </el-table-column>
 		</el-table>
 
-
-<!--		<div v-for="i in list">-->
-<!--			<h1>{{i}}</h1>-->
-<!--		</div>-->
 	</section>
 </template>
 
@@ -50,6 +46,7 @@
 
 	export default {
 		data(){
+			console.log(this.$route)
 			return {
 				tableData: [],
 				list:"name",
@@ -98,7 +95,6 @@
                                     dataset_list.push(temp)
 							}
 							this.isloading=false
-                            console.log(dataset_list)
                             sessionStorage.setItem("dataset_list",JSON.stringify(dataset_list))
 
 						})
@@ -109,17 +105,13 @@
 			//文件上传检验
 			beforeUpload(file) {
 			  const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
-
 			  const whiteList = ["csv","txt","xls", "xlsx"];
-
 			  if (whiteList.indexOf(fileSuffix) === -1) {
 				this.$message("上传文件只能是 csv、txt、xls、xlsx格式", "error");
 				return false;
 			  }
-
-			  const isLt10M = file.size / 1024 / 1024 < 10;
-
-			  if (!isLt10M) {
+			  const isLt15M = file.size / 1024 / 1024 < 15;
+			  if (!isLt15M) {
 				this.$message("上传文件大小不能超过 15MB", "error");
 				return false;
 			  }
@@ -130,7 +122,6 @@
 				this.$message("上传成功!",'info')
 				//清空上传列表
 				this.reload()
-
 			},
 			//上传失败回调
 			handleError(err, file, fileList) {
@@ -140,12 +131,9 @@
 				var erro = JSON.parse(body)
 				console.log(erro)
 				this.$message("上传失败!  " + erro.msg, 'warning')
-
-
 			},
 			//删除指定数据集文件
-			del(row,i){
-				console.log(row.name,i)
+			del(row,index){
 				axios.post('/api/del_dataset',{
 							dataset_name:row.name,
 							username:sessionStorage.getItem('user')
@@ -161,7 +149,7 @@
 				)
 			},
 			//跳转到数据预览页面
-			jump(row,i){
+			jump(row,index){
 				sessionStorage.setItem('dataset_name',row.name)
 				this.$router.push({ path: '/user' });
 			}

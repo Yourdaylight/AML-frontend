@@ -122,7 +122,19 @@
             this.get_datasets()
             this.get_clean_methods()
             this.get_dataset_cols(this.value)
+            var clean_params = sessionStorage.getItem("clean_params")
+            if (clean_params){
+                this.clean_form = JSON.parse(clean_params)
+            }
 
+        },
+        watch: {
+            clean_form:{
+                handler: function(val, oldVal){
+                    sessionStorage.setItem("clean_params",JSON.stringify(val))
+                },
+                deep: true
+            }
         },
         methods: {
             /*初始化加载方法:用户所有数据集、清洗方法 */

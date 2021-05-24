@@ -1,5 +1,6 @@
 <template>
-	<el-form ref="form" :model="form" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
+
+	<el-form ref="form" :model="form" :rules="rules_model" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
 		<el-form-item label="任务名称">
 			<el-input v-model="form.name"></el-input>
 		</el-form-item>
@@ -56,7 +57,7 @@
 		</el-form-item>
 
 		<el-form-item label="模型选择">
-			<el-checkbox-group v-model="form.models">
+			<el-checkbox-group v-model="form.model_name">
 				<el-checkbox
 					v-for="item in models[form.model_type]"
 					:label="item"
@@ -82,6 +83,7 @@
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="onSubmit">立即创建</el-button>
+			<el-button type="primary" @click="saveParams">保存条件</el-button>
 			<el-button @click.native.prevent>取消</el-button>
 		</el-form-item>
 
@@ -96,13 +98,14 @@
          </el-dialog>
 		<el-col v-html="run_code_result"></el-col>
 	</el-form>
+
 </template>
 
 <script>
 	import axios from 'axios'
 	axios.defaults.withCredentials=true;
 	export default {
-		inject:['reload'],
+		// inject:['reload'],
 
 		data() {
 			return {
@@ -120,6 +123,12 @@
 					model_scene:"股价预测",
 
 				},
+				rules_model:{
+					name:[
+						{required: true, message:'任务名称不能为空', trigger:'blur'},
+						{min:1, max:16, message:"长度在1-16个字符", trigger:'blur'},
+					]
+				},
 				models:{},//用户可选择的模型,key为模型类型(分类，回归，聚类),value为具体模型[]
 				metrics:{},//用户可选择的模型评估方法,key为模型类型(分类，回归，聚类),value为具体方法[]
 				dataset_options:[],
@@ -127,18 +136,35 @@
 				//用于目标列中不出现已选择的特征列
 				target_cols:[],
 				run_code_result:"",
-				scenes:["股价预测","气温预测","湿度预测",
-						"成绩等级分类","属性分类"]
+				scenes:["股价预测","气温预测","湿度预测","商品价格预测",
+						"成绩等级分类","属性分类","情感/语义评分",
+						"地理信息聚类","情感属性聚类"]
 			}
 		},
 		created(){
 			this.get_datasets()
 			var datasetName=sessionStorage.getItem('dataset_name')
+			console.log(this.form)
 			if (datasetName!='') {
 				this.form.dataset_name=datasetName
 				this.get_dataset_cols(datasetName)
 			}
 			this.get_methods()
+			//session是否存在参数缓存，如果存在，则读取缓存参数
+			var model_params = sessionStorage.getItem("model_params")
+			if (model_params)
+				this.form=JSON.parse(model_params)
+		},
+
+		//监听所有输入框的变化，实现数据缓存
+		watch:{
+			form:{
+				handler:function(val,oldVal){
+					console.log("new:%s,old:%s",val,oldVal)
+					sessionStorage.setItem("model_params",JSON.stringify(this.form))
+				},
+				deep:true
+			}
 		},
 		methods: {
 			onSubmit() {
@@ -150,6 +176,22 @@
 					var code=response.data.data
 					this.original_code=code
 					this.dialogVisible=true;
+
+				})
+			},
+			//保存当前查询条件
+			saveParams(){
+				axios.post('/api/model_selection/save_params',{
+					username:JSON.parse(sessionStorage.getItem('user')),
+					data:this.form
+				}).then((response)=>{
+					var code=response.data.data
+					if (code===200){
+						this.$message.success(response.data.msg)
+					}
+					else {
+						this.$message.warning(response.data.msg)
+					}
 
 				})
 			},
@@ -208,7 +250,7 @@
 					model_type: '分类',
 					features:[],
 					target:'',
-					models: [],
+					model_name: [],
 					metrics:[],
 					desc:''
 				},
@@ -227,10 +269,11 @@
 					}
 				}
 
+
 			},
 			//模型类型发生变化时，清空模型选择，模型评估的内容
 			onModelTypeChange(){
-				this.form.models = []
+				this.form.model_name = []
 				this.form.metrics = []
 			},
 			//导出代码文件

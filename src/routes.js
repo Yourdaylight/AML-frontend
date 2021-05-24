@@ -6,7 +6,7 @@ import Table from './views/nav1/Table.vue'
 import MLmodel from './views/nav1/MLmodel.vue'
 import user from './views/nav1/user.vue'
 import Clean from './views/nav1/Clean.vue'
-import Page4 from './views/nav2/Page4.vue'
+import History from './views/nav2/History.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
@@ -36,7 +36,7 @@ let routes = [
                 component: Main,
                 name: '主页',
                 hidden: true ,
-                keepAlive: true
+                meta:{keepAlive: true}
             },
             { path: '/table', component: Table, name: '我的数据集', meta:{keepAlive: true} },
             { path: '/user', component: user, name: '数据预览', meta:{keepAlive: true} },
@@ -51,15 +51,11 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '图片数据建模',
+        name: '构建历史',
         iconCls: 'fa fa-id-card-o',
         children: [
-            { path: '/page4', component: Page4, name: '页面4' },
-            { path: '/page5', component: Page5, name: '页面5' }
-        ],
-        meta: {
-            title:"ML代码生成平台"
-        }
+            {path: '/history', component: History, name: '历史记录'}
+        ]
     },
     {
         path: '/',
