@@ -131,7 +131,7 @@
                     .then((response) => {
                         var html_name = response.data.data
                         var insert_iframe = '<iframe  src="../../../static/'+html_name+
-                                            '" scrolling="yes" style="width: 100%;height: 500px;" frameborder="0"></iframe>'
+                                            '" scrolling="yes" style="width: 100%;height: 650px;" frameborder="0"></iframe>'
                         this.frame=insert_iframe
                         console.log("生成成功")
                         this.dialogVisible = true

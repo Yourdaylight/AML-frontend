@@ -10,7 +10,6 @@
             <el-table-column prop="evaluate_methods" label="模型评估方法" width="120"></el-table-column>
             <el-table-column prop="model_scene" label="模型使用场景" width="120"></el-table-column>
 
-
             <el-table-column label="快速建模" width="120">
                 <template slot-scope="scope">
                     <el-button size="mini" type="warning" @click="build_model(scope.row,scope.$index)">快速建模</el-button>
@@ -45,7 +44,6 @@
         inject:['reload'],
         methods: {
             history_list() {
-                var history_list = []
                 var username = sessionStorage.getItem('user')
                 axios.get('/api/get_history_list?username=' + JSON.parse(username))
                     .then((response) => {
@@ -65,6 +63,7 @@
 					model_params[key] = list_fields.indexOf(key)>-1 ? row[key].split(","):row[key]
 				}
 				sessionStorage.setItem("model_params",JSON.stringify(model_params))
+                sessionStorage.setItem("dataset_name",model_params["dataset_name"])
 				this.$router.push({path:'/MLmodel'})
 			},
 

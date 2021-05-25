@@ -89,7 +89,7 @@
 
 		<!--生成代码弹框-->
         <el-dialog title="代码" :visible.sync="dialogVisible" :close-on-click-modal="true" :modal="true" :show-close="true" :center="true">
-			<el-col style="white-space: pre-wrap;">{{original_code}}</el-col>-->
+			<el-col style="white-space: pre-wrap;">{{original_code}}</el-col>
 			<span slot="footer" class="dialog-footer">
                  <el-button @click="dialogVisible = false">取 消</el-button>
                  <el-button type="primary" @click="onExportCode">导出文件</el-button>
@@ -169,6 +169,8 @@
 		methods: {
 			onSubmit() {
 				console.log('submit!');
+				// 如果存在之前的运行结果，先清空
+				this.run_code_result=""
 				axios.post('/api/generate_code',{
 					username:JSON.parse(sessionStorage.getItem('user')),
 					data:this.form
@@ -176,7 +178,6 @@
 					var code=response.data.data
 					this.original_code=code
 					this.dialogVisible=true;
-
 				})
 			},
 			//保存当前查询条件
@@ -321,8 +322,10 @@
 						this.run_code_result = insert_iframe
 						this.dialogVisible = false
 					}
-					else
-						this.$message.error(response.data.msg)
+					else {
+						this.$message.error("运行失败，请确保训练的特征以及清洗完毕")
+						this.original_code = response.data.msg
+					}
 
 				}).catch(error => {
 					console.log(error.response)
