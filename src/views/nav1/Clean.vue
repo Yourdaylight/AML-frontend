@@ -13,10 +13,7 @@
             </el-select>
         </el-col>
 
-        <!--		<el-col v-for="msg in message" >-->
-        <!--			<el-col v-html="msg"></el-col>-->
-        <!--		</el-col>-->
-        <el-col class="clean_condition">
+        <el-form :inline="true" class="clean_condition">
             对
             <el-select multiple v-model="clean_form.columns">
                 <el-option
@@ -33,23 +30,28 @@
                 </el-option>
             </el-select>
 
-            <!--清洗方法类的子方法下拉选择框	-->
-            <el-select v-model="clean_form.sub_method" v-show="show_sub_method"
-            >
+            <!--  清洗方法类的子方法下拉选择框	-->
+            <el-select v-model="clean_form.sub_method" v-show="show_sub_method">
                 <el-option v-for="item in clean_methods[clean_form.clean_method]"
                            :key="item" :label="item" :value="item">
                 </el-option>
             </el-select>
 
+            <el-form-item >
+                <el-input placeholder="bbbb" v-model="clean_form.sub_condition" v-show="show_sub_condition"></el-input>
+            </el-form-item>
+
+
             操作
+
             <el-button type="primary" @click="add_step">添加步骤</el-button>
-        </el-col>
+        </el-form>
 
         <ul class="clean_conditions">
             <li  v-for="(item ,index) in cleanCondition">
                 对
                 <b class="column_style">{{item.columns.join(",")}}</b>列进行
-                <b class="method_style">{{item.clean_method}} -- {{item.sub_method}}</b>
+                <b class="method_style">{{item.clean_method}} -- {{item.sub_method}}{{item.sub_condition}}</b>
                 <i class="el-icon-delete2" @click="click_del(index)" ></i>
                 <i class="el-icon-arrow-up" @click="click_up(index)"></i>
                 <i class="el-icon-arrow-down" @click="click_down(index)"></i>
@@ -110,7 +112,8 @@
                 cleanCondition: [],//用户输入动态生成的清洗条件
                 method_choice: [],
                 clean_methods: {},//后端传的清洗方法（部分方法可能会有子方法需要动态生成输入框）
-                show_sub_method: false,
+                show_sub_method: false,// 展示清洗方法的子方法，如缺失值填充：按xx值填充
+                show_sub_condition:false,//对于某些清洗方法需要填写数值，例如字段筛选
                 condition_html: "",
                 saveDataDialogVisible: false,
                 generateCodeDialogVisible: false,
@@ -208,22 +211,31 @@
                 this.cleanCondition = []
             },
 
+            // 不同的数据清洗方法变更不同的输入框
             on_method_change() {
                 var method = this.clean_form.clean_method
                 var sub_method = this.clean_methods[method]
-                var have_sub = typeof sub_method === "string" ? false : true
+                var have_sub = typeof sub_method !== "string"
+                // 存在子方法则展示，否则清除子方法的历史输入
                 if (have_sub) {
                     this.clean_form.sub_method = this.clean_methods[method][0]
+                    this.show_sub_condition = method === "筛选"
+                    this.show_sub_method = have_sub
                 }
-                this.show_sub_method = have_sub
-
+                else {
+                    this.show_sub_condition = false
+                    this.show_sub_method = false
+                    this.clean_form.sub_condition=""
+                    this.clean_form.sub_method=""
+                }
             },
             add_step() {
                 var clean_form = this.clean_form
                 this.cleanCondition.push({
                     "columns":clean_form.columns,
                     "clean_method":clean_form.clean_method,
-                    "sub_method":clean_form.sub_method
+                    "sub_method":clean_form.sub_method,
+                    "sub_condition":clean_form.sub_condition
                 })
 
             },
@@ -241,7 +253,6 @@
                     }else{
                         this.$message.error(data.msg)
                     }
-
 
                 }).catch((error)=>{
                     this.$message.error("错误")
